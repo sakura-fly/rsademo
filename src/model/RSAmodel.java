@@ -7,7 +7,6 @@ public class RSAmodel {
 	private PublicKey puk;
 	private PrivateKey prik;
 	private String pukStr;
-	private String pubKHex;
 	private String prikStr;
 	private String ciphertext; //密文
 	private String cleartext; //明文
@@ -21,13 +20,6 @@ public class RSAmodel {
 		this.modulus = modulus;
 	}
 
-	public String getPubKHex() {
-		return pubKHex;
-	}
-
-	public void setPubKHex(String pubKHex) {
-		this.pubKHex = pubKHex;
-	}
 
 	public String getCiphertext() {
 		return ciphertext;

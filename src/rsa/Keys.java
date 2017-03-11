@@ -27,107 +27,18 @@ public class Keys {
 		return keyMap.get(MODULUS_KEY).toString();
 	}
 
-	public String getPublickey(Map<String, Object> keyMap) {
-		Key key = (Key) keyMap.get(PUBLIC_KEY);
-		return bytesToHexString(key.getEncoded());
-	}
-	
-	
-	
-	public String getPublick(Map<String, Object> keyMap){
-		Key key = (Key) keyMap.get(PUBLIC_KEY);
-		return toHexString(key.getEncoded());
-	}
 
 	public String getPublicKey(Map<String, Object> keyMap) throws Exception {
 		Key key = (Key) keyMap.get(PUBLIC_KEY);
-		return encryptBASE64(key.getEncoded());
+		return (new BASE64Encoder()).encodeBuffer(key.getEncoded());
 	}
 
 	public String getPrivateKey(Map<String, Object> keyMap) throws Exception {
 		Key key = (Key) keyMap.get(PRIVATE_KEY);
-		return encryptBASE64(key.getEncoded());
+		return (new BASE64Encoder()).encodeBuffer(key.getEncoded());
 	}
 
-	public byte[] decryptBASE64(String key) throws Exception {
-		return (new BASE64Decoder()).decodeBuffer(key);
-	}
 
-	public String encryptBASE64(byte[] key) throws Exception {
-		return (new BASE64Encoder()).encodeBuffer(key);
-	}
-
-	public String toHexString(byte bytes[]) {
-		char hexTable[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < bytes.length; i++) {
-			char chars[] = new char[2];
-			int d = (bytes[i] & 240) >> 4;
-			int m = bytes[i] & 15;
-			chars[0] = hexTable[d];
-			chars[1] = hexTable[m];
-			sb.append(chars);
-		}
-		return sb.toString();
-	}
-
-	/**
-	 * 
-	 * Convert byte[] to hex
-	 * string.这里我们可以将byte转换成int，然后利用Integer.toHexString(int)来转换成16进制字符串。
-	 * 
-	 * @param src
-	 *            byte[] data
-	 * @return hex string
-	 */
-	public String bytesToHexString(byte[] src) {
-		StringBuilder stringBuilder = new StringBuilder("");
-		if (src == null || src.length <= 0) {
-			return null;
-		}
-		for (int i = 0; i < src.length; i++) {
-			int v = src[i] & 0xFF;
-			String hv = Integer.toHexString(v);
-			if (hv.length() < 2) {
-				stringBuilder.append(0);
-			}
-			stringBuilder.append(hv);
-		}
-		return stringBuilder.toString();
-	}
-
-	/**
-	 * Convert hex string to byte[]
-	 * 
-	 * @param hexString
-	 *            the hex string
-	 * @return byte[]
-	 */
-	public byte[] hexStringToBytes(String hexString) {
-		if (hexString == null || hexString.equals("")) {
-			return null;
-		}
-		hexString = hexString.toUpperCase();
-		int length = hexString.length() / 2;
-		char[] hexChars = hexString.toCharArray();
-		byte[] d = new byte[length];
-		for (int i = 0; i < length; i++) {
-			int pos = i * 2;
-			d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
-		}
-		return d;
-	}
-
-	/**
-	 * Convert char to byte
-	 * 
-	 * @param c
-	 *            char
-	 * @return byte
-	 */
-	private byte charToByte(char c) {
-		return (byte) "0123456789ABCDEF".indexOf(c);
-	}
 
 	/**
 	 * 得到公钥

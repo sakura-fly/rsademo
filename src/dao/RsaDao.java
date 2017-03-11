@@ -14,10 +14,8 @@ public class RsaDao {
 			Map<String, Object> keys = k.initKey();
 			String pukStr = k.getPublicKey(keys).replace("\r\n", "");
 			String pirkStr = k.getPrivateKey(keys).replace("\r\n", "");  
-			String pukh = k.getPublick(keys).replace("\r\n", "");
 			rsa.setPrikStr(pirkStr);
 			rsa.setPukStr(pukStr);
-			rsa.setPubKHex(pukh);
 			rsa.setPrik(k.getPrivateKey(pirkStr));
 			rsa.setPuk(k.getPublicKey(pukStr));
 			rsa.setModulus(k.getModulus(keys));
@@ -33,7 +31,6 @@ public class RsaDao {
 		try {
 			RSAUtils ru = new RSAUtils();
 			res = ru.decrypt(rsa.getCiphertext(), rsa.getPrik());
-//			res = ru.decryptByPrivateKey(rsa.getCiphertext(), (RSAPrivateKey) rsa.getPrik());
 		} catch (Exception e) {
 			e.printStackTrace();
 			res = "";

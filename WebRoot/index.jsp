@@ -15,8 +15,10 @@
 <body>
 	<input  id="w" name="w"  />
 	<input  id='i' value="加密" type="button" />
-	<input  id='d' value="揭秘" type="button" />
-	<div id="en"></div>
-	<div id="de"></div>
+	<input  id='d' value="揭秘" type="button" /><br>
+	密文：
+	<div id="en">等待加密</div>
+	明文：
+	<div id="de">等待揭秘</div>
 </body>
 </html>
